@@ -1,18 +1,15 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+    <div id="app">
+        <Navbar />
+        <router-view class="h-custom" />
+    </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
-
+import { Component, Vue } from 'vue-property-decorator'
+import Navbar from './components/Navbar.vue'
 @Component({
-  components: {
-    HelloWorld,
-  },
+    components: { Navbar }
 })
 export default class App extends Vue {}
 </script>
@@ -20,11 +17,13 @@ export default class App extends Vue {}
 <style lang="scss">
 @import './src/assets/reset.scss';
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
+.h-custom {
+    height: calc(100vh - 56px);
 }
 </style>
