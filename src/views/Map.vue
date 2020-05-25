@@ -38,6 +38,7 @@ export default class Map extends Vue {
             .then(jsonData => {
                 // console.log(jsonData)
                 this.importDataToMap(jsonData)
+                this.$store.dispatch('storeData', { data: jsonData })
             })
             .catch(error => {
                 console.log(error)
