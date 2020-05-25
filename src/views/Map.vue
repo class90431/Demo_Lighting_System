@@ -23,6 +23,10 @@ export default class Map extends Vue {
     public mounted(): void {
         this.initMap()
         this.map.on('moveend', this.renderCluster)
+        this.streetLightLayer.on('click', e => {
+            // console.log(this)
+            this.clickClusterToZoomIn(e)
+        })
     }
     public getMaskData() {
         fetch(
@@ -32,7 +36,7 @@ export default class Map extends Vue {
                 return response.json()
             })
             .then(jsonData => {
-                console.log(jsonData)
+                // console.log(jsonData)
                 this.importDataToMap(jsonData)
             })
             .catch(error => {
@@ -80,7 +84,7 @@ export default class Map extends Vue {
         }).addTo(this.map)
     }
     public importDataToMap(maskData) {
-        // console.log(maskData)
+        console.log(maskData)
         index = new Supercluster({
             radius: 60,
             extent: 256,
@@ -96,6 +100,13 @@ export default class Map extends Vue {
         const clusters = index.getClusters(bbox, zoom)
         this.streetLightLayer.clearLayers()
         this.streetLightLayer.addData(clusters)
+    }
+    public clickClusterToZoomIn(e) {
+        let expansionZoom: number
+        if (e.layer.feature.properties.cluster_id) {
+            expansionZoom = index.getClusterExpansionZoom(e.layer.feature.properties.cluster_id)
+            this.map.flyTo(e.latlng, expansionZoom) // flyTo(center_Lat&Lng, zoomLevel)
+        }
     }
 }
 </script>
