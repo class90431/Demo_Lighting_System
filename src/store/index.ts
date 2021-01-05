@@ -12,7 +12,7 @@ export default new Vuex.Store({
       state.maskData = payload
       console.log(state.maskData)
     },
-    CHANGEDATA(state) {
+    CHANGEDATA() {
       // state.maskData = 
     }
   },
@@ -20,7 +20,7 @@ export default new Vuex.Store({
     storeData(context, payload) {
       context.commit('MASKDATA', payload.data)
     },
-    removeData(context, payload){
+    removeData(context, ){
       console.log('removeData')
       context.commit('CHANGEDATA')
     }

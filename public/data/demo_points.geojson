@@ -1,0 +1,114 @@
+{
+    "ret_code": 0,
+    "ret_desc": "OK",
+    "geojson": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        121.413381648187,
+                        24.9753422396303
+                    ]
+                },
+                "properties": {
+                    "id": 102673,
+                    "name": null,
+                    "display_name": "路燈A",
+                    "phone": "02-xxxx-xxxx",
+                    "comment": null,
+                    "status": 0,
+                    "twd_x": 291735.3,
+                    "twd_y": 2763110.0,
+                    "address": "新北市樹林區彭厝里東豐街67_2號"
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        121.656201372237,
+                        25.0654053308336
+                    ]
+                },
+                "properties": {
+                    "id": 205263,
+                    "name": null,
+                    "display_name": "路燈B",
+                    "phone": "02-xxxx-xxxx",
+                    "comment": null,
+                    "status": 0,
+                    "twd_x": 316202.79031,
+                    "twd_y": 2773182.62189,
+                    "address": "新北市汐止區大同里大同路二段312巷24號"
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        121.464613994184,
+                        25.1345311736247
+                    ]
+                },
+                "properties": {
+                    "id": 183076,
+                    "name": null,
+                    "display_name": "路燈C",
+                    "phone": "02-xxxx-xxxx",
+                    "comment": null,
+                    "status": 4,
+                    "twd_x": 296847.27,
+                    "twd_y": 2780759.293,
+                    "address": "新北市淡水區福德里自強路417巷1弄1號"
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        121.426141269821,
+                        25.0424416681648
+                    ]
+                },
+                "properties": {
+                    "id": 158675,
+                    "name": null,
+                    "display_name": "路燈D",
+                    "phone": "02-xxxx-xxxx",
+                    "comment": null,
+                    "status": 0,
+                    "twd_x": 293000.166,
+                    "twd_y": 2770546.181,
+                    "address": "新北市泰山區貴賢里貴子路15巷3弄17號"
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        121.465316525871,
+                        25.0001266571748
+                    ]
+                },
+                "properties": {
+                    "id": 12359,
+                    "name": null,
+                    "display_name": "路燈E",
+                    "phone": "02-xxxx-xxxx",
+                    "comment": null,
+                    "status": 2,
+                    "twd_x": 296969.334,
+                    "twd_y": 2765872.198,
+                    "address": "新北市板橋區廣德里重慶路245巷50弄17號"
+                }
+            }
+        ]
+    }
+}
