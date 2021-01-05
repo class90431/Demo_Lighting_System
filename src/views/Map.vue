@@ -32,9 +32,7 @@ export default class Map extends Vue {
 		})
 	}
 	public getMaskData() {
-		fetch(
-			'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?fbclid=IwAR2qn9xVE2Bbh4RBP8gaoMCQYr3j9ZfV6-3T4AhpPCu3fMysTdze73Oh9aQ'
-		)
+		fetch('data/demo_points.geojson')
 			.then((response) => {
 				return response.json()
 			})
@@ -93,7 +91,7 @@ export default class Map extends Vue {
 			radius: 60,
 			extent: 256,
 			maxZoom: 15,
-		}).load(maskData.features)
+		}).load(maskData.geojson.features)
 		index = Object.freeze(index)
 		this.renderCluster()
 	}
