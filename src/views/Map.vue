@@ -49,16 +49,35 @@ export default class Map extends Vue {
 		this.streetLightLayer = L.geoJson(null, {
 			pointToLayer: function (feature, latlng) {
 				if (!feature.properties.cluster) {
+					const status: number = feature.properties.status
+					let fillColor: string
+					switch (status) {
+						case 0:
+							fillColor = 'green'
+							break
+						case 2:
+							fillColor = 'orange'
+							break
+						case 4:
+							fillColor = 'red'
+							break
+						default:
+							fillColor = 'yellow'
+							alert('Error on status')
+							break
+					}
 					return L.circleMarker(latlng, {
-						radius: 5,
+						color: 'gray',
+						fillColor: fillColor,
+						fillOpacity: 1,
+						weight: 2,
+						radius: 10,
 						stroke: true,
 					}).bindTooltip(
-						`藥局名稱：${feature.properties.name}</br>
-							TEL：${feature.properties.phone}</br>
-							地址：${feature.properties.address}</br>
-							成人口罩數量：${feature.properties.mask_adult}</br>
-                            兒童口罩數量：${feature.properties.mask_child}</br>
-							更新時間：${feature.properties.updated}`
+						`ID:${feature.properties.id}</br>
+						名稱:${feature.properties.display_name}</br>
+						地址:${feature.properties.address}</br>
+						電話:${feature.properties.phone}`
 					)
 				}
 				const count = feature.properties.point_count
