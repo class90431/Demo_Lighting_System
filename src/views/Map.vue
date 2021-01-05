@@ -96,8 +96,8 @@ export default class Map extends Vue {
 	}
 	public initMap() {
 		this.map = L.map('map', {
-			center: [23.505, 122.09],
-			zoom: 8,
+			center: [25.1, 121.4],
+			zoom: 11,
 			layers: [this.streetLightLayer],
 		})
 		L.tileLayer('//stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
