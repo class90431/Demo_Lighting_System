@@ -34,9 +34,8 @@ export default new Vuex.Store({
 
       })
     },
-    removeData(context, ){
-      console.log('removeData')
-      context.commit('CHANGEDATA')
+    updateData(context, payload) {
+      context.commit('UPDATE_DATA', payload.data)
     }
   },
   modules: {

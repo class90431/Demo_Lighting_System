@@ -46,7 +46,11 @@
                     placeholder="Search"
                     aria-label="Search"
                 />
-                <button @click="test" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+				<button
+					@click="removeData"
+					class="btn btn-outline-success my-2 my-sm-0"
+					type="button"
+				>Search</button>
             </form>
         </div>
     </nav>
@@ -58,9 +62,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class Navbar extends Vue {
     @Prop() private msg!: string
-    public test() {
-        this.$store.dispatch('removeData')
-        console.log(this.$store.state.maskData)
+	public removeData() {
+		this.$store.dispatch('updateData', { data: [] })
     }
 }
 </script>
