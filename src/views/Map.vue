@@ -7,7 +7,7 @@
 	</div>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import L from 'leaflet'
 import Supercluster from 'supercluster'
 
@@ -20,25 +20,32 @@ export default class Map extends Vue {
 	streetLightLayer: any = L.geoJson(null)
 	maskPoints: object = {}
 	public created(): void {
-		this.getMaskData()
+		this.getData()
 		this.setLayer()
+		this.$store.dispatch('subscribeMQTT')
 	}
 	public mounted(): void {
 		this.initMap()
 		this.map.on('moveend', this.renderCluster)
 		this.streetLightLayer.on('click', (e) => {
-			// console.log(this)
 			this.clickClusterToZoomIn(e)
 		})
 	}
-	public getMaskData() {
-		fetch('data/demo_points.geojson')
+	get mapData() {
+		return this.$store.state.MAP_DATA
+	}
+	@Watch('mapData')
+	updateMap(value) {
+		this.importDataToMap(value)
+	}
+	public async getData() {
+		await fetch('data/demo_points.geojson')
 			.then((response) => {
 				return response.json()
 			})
-			.then((jsonData) => {
-				// console.log(jsonData)
-				this.importDataToMap(jsonData)
+			.then((response) => {
+				const data = response.geojson.features
+				this.$store.dispatch('updateData', { data: data })
 			})
 			.catch((error) => {
 				console.log(error)
@@ -83,7 +90,6 @@ export default class Map extends Vue {
 				const size = count < 100 ? 'small' : count < 1000 ? 'medium' : 'large'
 				const icon = L.divIcon({
 					html: '<div><span>' + feature.properties.point_count_abbreviated + '</span></div>',
-					// html: '<div><span>' + feature.properties.point_count + '</span></div>',
 					className: 'marker-cluster marker-cluster-' + size,
 					iconSize: L.point(40, 40),
 				})
@@ -103,14 +109,12 @@ export default class Map extends Vue {
 			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 		}).addTo(this.map)
 	}
-	public importDataToMap(maskData) {
-		console.log(maskData)
+	public importDataToMap(data) {
 		index = new Supercluster({
 			radius: 60,
 			extent: 256,
 			maxZoom: 15,
-		}).load(maskData.geojson.features)
-		index = Object.freeze(index)
+		}).load(data)
 		this.renderCluster()
 	}
 	public renderCluster() {
