@@ -90,7 +90,6 @@ export default class Map extends Vue {
 				const size = count < 100 ? 'small' : count < 1000 ? 'medium' : 'large'
 				const icon = L.divIcon({
 					html: '<div><span>' + feature.properties.point_count_abbreviated + '</span></div>',
-					// html: '<div><span>' + feature.properties.point_count + '</span></div>',
 					className: 'marker-cluster marker-cluster-' + size,
 					iconSize: L.point(40, 40),
 				})
