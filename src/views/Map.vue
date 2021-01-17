@@ -20,8 +20,9 @@ export default class Map extends Vue {
 	streetLightLayer: any = L.geoJson(null)
 	maskPoints: object = {}
 	public created(): void {
-		this.getMaskData()
+		this.getData()
 		this.setLayer()
+		this.$store.dispatch('subscribeMQTT')
 	}
 	public mounted(): void {
 		this.initMap()
@@ -33,12 +34,14 @@ export default class Map extends Vue {
 	}
 	public getMaskData() {
 		fetch('data/demo_points.geojson')
+	public async getData() {
+		await fetch('data/demo_points.geojson')
 			.then((response) => {
 				return response.json()
 			})
-			.then((jsonData) => {
-				// console.log(jsonData)
-				this.importDataToMap(jsonData)
+			.then((response) => {
+				const data = response.geojson.features
+				this.$store.dispatch('updateData', { data: data })
 			})
 			.catch((error) => {
 				console.log(error)
@@ -103,14 +106,12 @@ export default class Map extends Vue {
 			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 		}).addTo(this.map)
 	}
-	public importDataToMap(maskData) {
-		console.log(maskData)
+	public importDataToMap(data) {
 		index = new Supercluster({
 			radius: 60,
 			extent: 256,
 			maxZoom: 15,
-		}).load(maskData.geojson.features)
-		index = Object.freeze(index)
+		}).load(data)
 		this.renderCluster()
 	}
 	public renderCluster() {
