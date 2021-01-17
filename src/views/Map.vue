@@ -7,7 +7,7 @@
 	</div>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import L from 'leaflet'
 import Supercluster from 'supercluster'
 
@@ -28,12 +28,16 @@ export default class Map extends Vue {
 		this.initMap()
 		this.map.on('moveend', this.renderCluster)
 		this.streetLightLayer.on('click', (e) => {
-			// console.log(this)
 			this.clickClusterToZoomIn(e)
 		})
 	}
-	public getMaskData() {
-		fetch('data/demo_points.geojson')
+	get mapData() {
+		return this.$store.state.MAP_DATA
+	}
+	@Watch('mapData')
+	updateMap(value) {
+		this.importDataToMap(value)
+	}
 	public async getData() {
 		await fetch('data/demo_points.geojson')
 			.then((response) => {
