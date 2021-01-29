@@ -1,34 +1,37 @@
-# mask_map_typescript
+# 路燈即時監控
 
-## Project setup
-```
-npm install
-```
+## 畫面
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![](./src/img/initPage.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 簡介
 
-### Run your tests
-```
-npm run test
-```
+#### 使用者可用網頁監控路燈的即時狀態、詳細資料
+- 路燈狀態：
+    - Normal （以綠色顯示）
+    - Warning （以黃色顯示）
+    - Error （以紅色顯示）
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 操作
+#### 滑鼠 hover 在座標上，可顯示路燈詳細資料：
+- 路燈 ID
+- 名稱
+- 地址
+- ...
 
-### Run your unit tests
-```
-npm run test:unit
-```
+![](./src/img/Hover.png)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### 滑鼠滾輪可 zoom in / out 地圖
+
+## 核心技術
+#### Leaflet.js
+- 開源地圖繪製工具
+#### RabbitMQ
+- 使用 `Docker` 架設，作為 `MQTT` 的 `Broker`
+- 如何架設可參考個人另一篇[文章](https://hackmd.io/@class90431/RabbitMQWithDocker)
+#### WebSocket
+- 藉由 `WebSocket` 協定，讓網頁能即時更新路燈最新資料
+#### mqtt.js
+- `JavaScript` 套件，用於訂閱（Subscribe）`MQTT` 的 `Topic`
+#### TypeScript
+- 此 Demo 用 TypeScript 撰寫
